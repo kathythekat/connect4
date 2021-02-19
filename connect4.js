@@ -75,10 +75,7 @@ function makeHtmlBoard() {
 
 function findSpotForCol(x) {
   // TODO: write the real version of this, rather than always returning 0
-  console.log(board);
-  console.log(x);
   for (let y = HEIGHT - 1; y >= 0; y--) {
-    
     let currSpot = (board[x][y]);
     if (!(currSpot)) {
       return y;
@@ -115,7 +112,7 @@ function handleClick(evt) {
   // get next spot in column (if none, ignore click)
   let y = findSpotForCol(x);
   if (y === null) {
-    return x;
+    return;
   }
 
   // place piece in board and add to HTML table
@@ -149,7 +146,6 @@ function checkForWin() {
    * currPlayer
    */
   function _win(cells) {
-
     // TODO: Check four cells to see if they're all legal & all color of current
     // player
     for(let cell of cells){
@@ -177,8 +173,9 @@ function checkForWin() {
 
       let horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]];
       let vert =[[y,x],[y+1,x],[y+2,x],[y+3,x]];
-      let diagDL = [[y,x][y-1,x+1],[y-2,x+2],[y-3,x+3]];
-      let diagDR = [[y,x],[y+1,x-1],[y+2,x-2],[y+3,x-3]];
+      let diagDL = [[y,x],[y+1,x-1],[y+2,x-2],[y+3,x-3]];
+      let diagDR = [[y,x],[y-1,x+1],[y-2,x+2],[y-3,x+3]];
+     
 
       // find winner (only checking each win-possibility as needed)
       if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {
