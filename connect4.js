@@ -76,7 +76,7 @@ function makeHtmlBoard() {
 function findSpotForCol(x) {
   // TODO: write the real version of this, rather than always returning 0
   for (let y = HEIGHT - 1; y >= 0; y--) {
-    let currSpot = (board[x][y]);
+    let currSpot = (board[y][x]);
     if (!(currSpot)) {
       return y;
     }
@@ -117,8 +117,7 @@ function handleClick(evt) {
 
   // place piece in board and add to HTML table
   // TODO: add line to update in-memory board
-  board[x][y] =currPlayer;
-  console.log(board[x][y]);
+  board[y][x] =currPlayer;
   placeInTable(y, x);
 
 
@@ -172,9 +171,9 @@ function checkForWin() {
       // [ [y, x], [y, x], [y, x], [y, x] ]
 
       let horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]];
-      let vert =[[y,x],[y+1,x],[y+2,x],[y+3,x]];
+      let vert = [[y,x],[y+1,x],[y+2,x],[y+3,x]];
       let diagDL = [[y,x],[y+1,x-1],[y+2,x-2],[y+3,x-3]];
-      let diagDR = [[y,x],[y-1,x+1],[y-2,x+2],[y-3,x+3]];
+      let diagDR = [[y,x],[y-1,x-1],[y-2,x-2],[y-3,x-3]];
      
 
       // find winner (only checking each win-possibility as needed)
